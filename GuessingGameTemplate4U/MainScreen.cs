@@ -17,11 +17,12 @@ namespace GuessingGameTemplate4U
         //creates a random number between 1 and 100 and stores it in a global 
         //variable that can be used throughout the program 
         public static Random randNum = new Random();
-        int rand = randNum.Next(1, 101);
+        int rand;
 
         public MainScreen()
         {
             InitializeComponent();
+            rand = randNum.Next(1, 101);
         }
 
         private void guessButton_Click(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace GuessingGameTemplate4U
             
             int guess = Convert.ToInt16(inputBox.Text);
 
-            //TODO add guess to List of guesses on Form1
+            Form1.userGuesses.Add(guess);
 
 
             if (guess < rand)
@@ -45,8 +46,9 @@ namespace GuessingGameTemplate4U
                 outputLabel.Text = "You Got it!";
                 Refresh();
                 Thread.Sleep(1000);
-
-                //TODO close this screen and open a Results Screen (you need to create this)
+                Form1 f = (Form1)this.FindForm();
+                f.switchScreen(this, "RS");
+                
 
             }
 
